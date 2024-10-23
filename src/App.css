@@ -1,14 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 /* Roboto */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 
 :root{
   --background-color: #20232a;
   --background-lighter: #6b87bea2;
   --green:#8dc891;
+  --react-blue: #61DBFB;
+  --lastfm-red: #e11c23;
+  --blue: #79b6f2;
+  --text: rgb(168, 168, 168);
+  --background-color-transparent: #20232acc;
+}
 
-  
+.menu{
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+}
+
+
+.list-item-text{
+  font-size: 5rem;
+}
+
+.github-ico{
+  font-size: rem;
+  color: var(--background-lighter);
+}
+
+
+.menu button{
+  color: var(--background-lighter);
+}
+
+.menu .menu-ico{
+  font-size: 2.5rem;
 }
 
 body{
@@ -23,28 +53,42 @@ body{
   flex-direction: column;
 }
 
+.type-animation {
+  text-align: center;
+  display: block;
+  width: 100%; 
+}
+
 .welcomeMsg{
   margin: 2rem;
   font-size: 2rem;
   font-family: 'Source Code Pro', monospace;
-  color: var(--green);
+  color: var(--blue);
+  word-spacing: -.5rem;
 
 }
 
 .nowPlaying{
   margin: 2rem;
   font-size: 1.5rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 100  ;
-  color: rgb(168, 168, 168);
+  color: var(--text);
   text-align: center;
 }
 
-.nowPlaying img{
+.cover-container img{
   width: 45vh;
   filter: drop-shadow(0 0 1rem var(--background-lighter));
-  border-radius:5px ;
+  transition: 2s;
+  border-radius: 1rem;
 }
+
+
+.cover-container img:hover{
+  transform: scale(1.05);
+;
+}
+
 
 
 
@@ -58,13 +102,43 @@ body{
 
 
 #track{
-  font-weight: 500;
+  font-weight: 300;
   font-size: 1.8rem;
+  letter-spacing: -0.05rem;
 }
 #track, #artist, #album {
   margin: 0.3rem 0; /* Reduce the margin between elements */
   
 }
+
+.builtWith{
+  color: var(--text);
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  margin: 1.5rem;
+  font-weight: 400;
+  font-size: 1.3rem;
+  font-family: 'Source Code Pro';
+
+}
+
+.react-ico, .lastfm-ico{
+  text-decoration: none;
+  font-size: 1.5rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.react-ico{
+  color: var(--react-blue);
+
+}
+.lastfm-ico{
+  color: var(--lastfm-red);
+}
+
+
 /*   
   style={{ fontSize: '2em', display: 'inline-block', fontFamily: 'Source Code Pro', color: '#8dc891'}} */
 

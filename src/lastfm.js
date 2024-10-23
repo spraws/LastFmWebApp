@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ColorThief from 'colorthief';
-
+import { infinity } from 'ldrs';
 
 const NowPlaying = () => {
     const [track, setTrack] = useState(null);
+    const [albumArtUrl, setAlbumArtUrl] = useState('');
+    const [error, setError] = useState('');
     const API_KEY = process.env.REACT_APP_LAST_FM_API_KEY;
     const USERNAME = process.env.REACT_APP_LASTFM_USERNAME;
+    infinity.register();
 
     useEffect(() => {
         const fetchNowPlaying = async () => {
@@ -15,7 +17,10 @@ const NowPlaying = () => {
 
                 console.log(response.data); // Log the response to verify API access
                 if (response.data.recenttracks && response.data.recenttracks.track.length > 0) {
-                    setTrack(response.data.recenttracks.track[0]);
+                    const currentTrack = response.data.recenttracks.track[0];
+                    setTrack(currentTrack);
+                    // Fetch album art based on the current track
+                    await fetchAlbumArt(currentTrack.album['#text']);
                 }
             } catch (error) {
                 console.error("Error fetching data from Last.fm API:", error);
@@ -27,6 +32,25 @@ const NowPlaying = () => {
             }
         };
 
+        const fetchAlbumArt = async (albumName) => {
+            setError(''); // Reset error state
+            try {
+                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(albumName)}&entity=album`);
+                console.log(albumName);
+                const data = await response.json();
+
+                if (data.resultCount > 0) {
+                    const albumArt = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb'); 
+                    setAlbumArtUrl(albumArt);
+                } else {
+                    setError('No album found');
+                }
+            } catch (err) {
+                setError('Error fetching album art');
+                console.error(err);
+            }
+        }
+
         fetchNowPlaying();
     }, [API_KEY, USERNAME]);
 
@@ -35,16 +59,23 @@ const NowPlaying = () => {
             {track ? (
                 <div>
                     <div className="cover-container">
-                    {track.image && track.image.length > 0 && (
-                    <img src={track.image[3]['#text']} alt={`${track.album['#text']} cover`} />
-                    )}
+                        {albumArtUrl && <img src={albumArtUrl} alt={`${track.album['#text']} cover`} />}
                     </div>
                     <p id='track'>{track.name}</p>
                     <p id='artist'>{track.artist['#text']}</p>
-                    {/* <p id='album'>{track.album['#text']}</p> */}
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
                 </div>
             ) : (
-                <p>Loading...</p>
+                <p>
+                    <l-infinity
+                        size="55"
+                        stroke="4"
+                        stroke-length="0.15"
+                        bg-opacity="0.1"
+                        speed="1.3"
+                        color="var(--background-lighter)" 
+                    ></l-infinity>
+                </p>
             )}
         </div>
     );

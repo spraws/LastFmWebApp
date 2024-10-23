@@ -2,16 +2,20 @@ import logo from './logo.svg';
 import './App.css';
 import { TypeAnimation } from 'react-type-animation';
 import NowPlaying from './lastfm';
+import ReactFooter from './Footer';
+import TemporaryDrawer from './Drawer';
 
 function App() {
   return (
     <div className="App">
+      {/* <TemporaryDrawer /> */}
       <div className="welcomeMsg">
       <WelcomeMsg />
       </div>
       <div className="nowPlaying">
       <NowPlaying />
       </div>
+      <ReactFooter />
     </div>
 
   );
@@ -20,7 +24,7 @@ function App() {
 
 const WelcomeMsg = () => {
   return (
-    <TypeAnimation
+    <TypeAnimation className='type-animation'
       sequence={[
         'Hello', // Types 'Hello'
         2000, // Waits 1s
@@ -29,7 +33,6 @@ const WelcomeMsg = () => {
           console.log('Sequence completed');
         },
       ]}
-      wrapper="span"
       cursor={true}
       repeat={0}
     />
