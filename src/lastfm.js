@@ -20,7 +20,8 @@ const NowPlaying = () => {
                     const currentTrack = response.data.recenttracks.track[0];
                     setTrack(currentTrack);
                     // Fetch album art based on the current track
-                    await fetchAlbumArt(currentTrack.album['#text']);
+                    await fetchAlbumArt(currentTrack.album['#text'], currentTrack.artist['#text']);
+                    await fetchArtist(currentTrack.artist['#text']);
                 }
             } catch (error) {
                 console.error("Error fetching data from Last.fm API:", error);
@@ -32,11 +33,26 @@ const NowPlaying = () => {
             }
         };
 
-        const fetchAlbumArt = async (albumName) => {
+        const fetchArtist = async (artistName) => {
+            try {
+                const response = await axios.get(`https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistName}&api_key=${API_KEY}&format=json`);
+                console.log(response.data); // Log the response to verify API access
+            } catch (error) {
+                console.error("Error fetching artist data from Last.fm API:", error);
+                if (error.response) {
+                    console.error("Response data:", error.response.data);
+                    console.error("Response status:", error.response.status);
+                    console.error("Response headers:", error.response.headers);
+                }
+            }
+            console.log(artistName);
+        };
+
+        const fetchAlbumArt = async (albumName, artistName) => {
             setError(''); // Reset error state
             try {
-                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(albumName)}&entity=album`);
-                console.log(albumName);
+                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(albumName)}+${encodeURIComponent(artistName)}&entity=album`);
+                console.log(albumName, artistName);
                 const data = await response.json();
 
                 if (data.resultCount > 0) {
