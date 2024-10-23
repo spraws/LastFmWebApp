@@ -11,7 +11,8 @@ const NowPlaying = () => {
     useEffect(() => {
         const fetchNowPlaying = async () => {
             try {
-                const response = await axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json`);
+                const response = await axios.get(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json`);
+
                 console.log(response.data); // Log the response to verify API access
                 if (response.data.recenttracks && response.data.recenttracks.track.length > 0) {
                     setTrack(response.data.recenttracks.track[0]);
