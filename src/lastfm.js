@@ -38,6 +38,10 @@ const NowPlaying = () => {
         };
         setInterval(fetchNowPlaying, 60000);
 
+
+
+        
+
         const fetchArtist = async (artistName) => {
             try {
                 const response = await axios.get(`https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistName}&api_key=${API_KEY}&format=json`);
