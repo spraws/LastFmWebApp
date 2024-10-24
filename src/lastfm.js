@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { infinity } from 'ldrs';
+export const time = new Date().toLocaleTimeString();
+
 
 const NowPlaying = () => {
     const [track, setTrack] = useState(null);
@@ -13,6 +15,8 @@ const NowPlaying = () => {
     useEffect(() => {
         const fetchNowPlaying = async () => {
             try {
+                const time = new Date();
+                console.log('Fetching now playing track...' + time);
                 const response = await axios.get(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json`);
 
                 console.log(response.data); // Log the response to verify API access
@@ -32,6 +36,7 @@ const NowPlaying = () => {
                 }
             }
         };
+        setInterval(fetchNowPlaying, 60000);
 
         const fetchArtist = async (artistName) => {
             try {
@@ -54,8 +59,6 @@ const NowPlaying = () => {
             setError(''); // Reset error state
             try {
                 const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(albumName)}+${encodeURIComponent(artistName)}&entity=album`);
-                console.log(albumName, artistName);
-                console.log(response);
                 const data = await response.json();
 
                 if (data.resultCount > 0) {
@@ -73,6 +76,7 @@ const NowPlaying = () => {
         fetchNowPlaying();
     }, [API_KEY, USERNAME]);
 
+    
     return (
         <div className="now-playing">
             {track ? (

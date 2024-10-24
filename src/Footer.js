@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLastfm, faReact } from '@fortawesome/free-brands-svg-icons';
+import { time } from './lastfm';
 
 export default class ReactFooter extends Component {
   render() {
@@ -16,6 +17,7 @@ export default class ReactFooter extends Component {
             <FontAwesomeIcon icon={faReact} className="react-ico" />
           </a>
         </p>
+        <p className='update'>Last Updated at: {time}</p>
       </div>
     );
   }
