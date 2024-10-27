@@ -24,13 +24,14 @@ const NowPlaying: React.FC = () => {
                 const time = new Date();
                 console.log('Fetching now playing track...' + time);
                 const response = await axios.get(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json`);
-
+        
                 console.log(response.data); // Log the response to verify API access
                 if (response.data.recenttracks && response.data.recenttracks.track.length > 0) {
                     const currentTrack = response.data.recenttracks.track[0];
                     setTrack(currentTrack);
+        
                     // Fetch album art based on the current track
-                    await fetchAlbumArt(currentTrack.album['#text'], currentTrack.artist['#text']);
+                    await fetchAlbumArt(currentTrack.album['#text'], currentTrack.artist['#text'], currentTrack.name); // Use currentTrack.name here
                     await fetchArtist(currentTrack.artist['#text']);
                 }
             } catch (error: any) {
@@ -42,6 +43,7 @@ const NowPlaying: React.FC = () => {
                 }
             }
         };
+        
         const intervalId = setInterval(fetchNowPlaying, 60000);
 
         const fetchArtist = async (artistName: string) => {
@@ -59,12 +61,12 @@ const NowPlaying: React.FC = () => {
             console.log(artistName);
         };
 
-        const fetchAlbumArt = async (albumName: string, artistName: string) => {
+        const fetchAlbumArt = async (albumName: string, artistName: string, track: string) => {
             setError(''); // Reset error state
             try {
-                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(albumName)}+${encodeURIComponent(artistName)}&entity=album`);
+                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(albumName)}+${encodeURIComponent(artistName)}+${encodeURIComponent(track)}&entity=musicTrack`);
                 const data = await response.json();
-
+                console.log(response);
                 if (data.resultCount > 0) {
                     const albumArt = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb'); 
                     setAlbumArtUrl(albumArt);
