@@ -39,7 +39,8 @@ export default function TemporaryDrawer() {
             <ListItemButton sx={{ justifyContent: 'center', 
             }}>
               <ListItemText primary={text} sx={{ 
-                textAlign: 'center', className:"list-item-text"
+                textAlign: 'center', className:"list-item-text",
+                
               }}
                />
             </ListItemButton>

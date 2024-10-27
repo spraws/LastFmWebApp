@@ -4,6 +4,8 @@ import { infinity } from 'ldrs';
 export const time = new Date().toLocaleTimeString();
 
 
+
+
 const NowPlaying = () => {
     const [track, setTrack] = useState(null);
     const [albumArtUrl, setAlbumArtUrl] = useState('');
@@ -19,12 +21,12 @@ const NowPlaying = () => {
                 console.log('Fetching now playing track...' + time);
                 const response = await axios.get(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${USERNAME}&api_key=${API_KEY}&format=json`);
 
-                console.log(response.data); // Log the response to verify API access
+                // console.log(response.data); // Log the response to verify API access
                 if (response.data.recenttracks && response.data.recenttracks.track.length > 0) {
                     const currentTrack = response.data.recenttracks.track[0];
                     setTrack(currentTrack);
                     // Fetch album art based on the current track
-                    await fetchAlbumArt(currentTrack.album['#text'], currentTrack.artist['#text']);
+                    await fetchAlbumArt(currentTrack.album['#text'], currentTrack.artist['#text'], currentTrack.name);
                     await fetchArtist(currentTrack.artist['#text']);
                 }
             } catch (error) {
@@ -45,7 +47,7 @@ const NowPlaying = () => {
         const fetchArtist = async (artistName) => {
             try {
                 const response = await axios.get(`https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistName}&api_key=${API_KEY}&format=json`);
-                console.log(response.data); // Log the response to verify API access
+                // console.log(response.data); // Log the response to verify API access
             } catch (error) {
                 console.error("Error fetching artist data from Last.fm API:", error);
                 if (error.response) {
@@ -54,16 +56,17 @@ const NowPlaying = () => {
                     console.error("Response headers:", error.response.headers);
                 }
             }
-            console.log(artistName);
+
         };
 
 
 
-        const fetchAlbumArt = async (albumName, artistName) => {
+        const fetchAlbumArt = async (albumName, artistName, trackName) => {
             setError(''); // Reset error state
             try {
-                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(albumName)}+${encodeURIComponent(artistName)}&entity=album`);
+                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(albumName)}+${encodeURIComponent(artistName)}+${encodeURIComponent(trackName)}&entity=musicTrack`);
                 const data = await response.json();
+                // console.log(response);
 
                 if (data.resultCount > 0) {
                     const albumArt = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb'); 
@@ -75,6 +78,7 @@ const NowPlaying = () => {
                 setError('Error fetching album art');
                 console.error(err);
             }
+            console.log(`${artistName} - ${trackName}`);
         }
 
         fetchNowPlaying();

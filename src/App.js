@@ -8,7 +8,7 @@ import TemporaryDrawer from './Drawer';
 function App() {
   return (
     <div className="App">
-      {/* <TemporaryDrawer /> */}
+      <TemporaryDrawer />
       <div className="welcomeMsg">
       <WelcomeMsg />
       </div>
