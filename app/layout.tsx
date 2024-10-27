@@ -12,7 +12,9 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
-import { Navbar } from "@/components/navbar";
+// import { Navbar } from "@/components/floating-navbar";
+import { NavbarDemo } from "@/components/navbar";
+import { HoverBorderGradientDemo } from "@/components/border-gradient";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,14 +40,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html className="dark">
       <body>
         {/* header */}
-        <div className="mt-2">
-        <Navbar />
+        <div>
+          <NavbarDemo />
         </div>
         {children}
       </body>
     </html>
   );
 }
+
+
