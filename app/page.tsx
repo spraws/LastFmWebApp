@@ -6,12 +6,16 @@ import { RiNextjsLine } from "react-icons/ri";
 import { SiShadcnui } from "react-icons/si";
 import { ShimmerBtn } from "@/components/ui/shimmer-btn";
 
+import HelpBtn from "@/components/ui/help-btn";
+
 
 export default function Home() {
   return (
-
-    <div className="absolute inset-0 -z-10">
-      <WavyBackground className="">
+    <div className="">
+            <div className="absolute z-10 bottom-0 m-5 ">
+        <HelpBtn></HelpBtn>
+    </div>
+      <WavyBackground className=" -z-5 absolute ">
     <h1 className="text-5xl md:text-4xl lg:text-7xl text-white font-bold inter-var text-center">
       Portfolio
     </h1>
@@ -48,10 +52,11 @@ export default function Home() {
       <a href="https://github.com/spraws/portfolio-web">
       <ShimmerBtn></ShimmerBtn></a>
     </div>
-  </WavyBackground>
-  
+
+      </WavyBackground>
+
     </div>
-    
+
     
   );
 }

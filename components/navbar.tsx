@@ -35,13 +35,13 @@ function Navbar({ className }: { className?: string }) {
             />
             <ProductItem
               title="pyPass"
-              href="https://tailwindmasterkit.com"
-              src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
+              href="/pypass"
+              src="/"
               description="A pyhton based password manager, with a CLI interface."
             />
             <ProductItem
               title="win-hash-grab"
-              href="https://gomoonbeam.com"
+              href="/winhashgrabf"
               src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
               description="A python script to retrieve user info and 'SYSTEM'/'SAM' registries, so you can retrieve the user hashed password."
             />

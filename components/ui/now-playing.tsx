@@ -67,7 +67,7 @@ const NowPlaying: React.FC = () => {
         const fetchAlbumArt = async (albumName: string, artistName: string, track: string) => {
             setError(''); // Reset error state
             try {
-                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(artistName)}+${encodeURIComponent(track)}&entity=musicTrack`);
+                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(track)}+${encodeURIComponent(artistName)}+${encodeURIComponent(albumName)}&entity=musicTrack`);
                 const data = await response.json();
                 console.log(response);
                 if (data.resultCount > 0) {
@@ -80,7 +80,7 @@ const NowPlaying: React.FC = () => {
                 setError('Error fetching album art');
                 console.error(err);
             }
-            console.log(`${artistName} - ${track}. From - ${albumName}`);
+            console.log(`Artist: ${artistName} - Song:  ${track} - Album:${albumName}`);
         }
 
         fetchNowPlaying();
