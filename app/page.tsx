@@ -4,25 +4,26 @@ import { RiTailwindCssFill } from "react-icons/ri";
 import { FaReact } from "react-icons/fa";
 import { RiNextjsLine } from "react-icons/ri";
 import { SiShadcnui } from "react-icons/si";
+import { ShimmerBtn } from "@/components/ui/shimmer-btn";
 
 
 export default function Home() {
   return (
 
     <div className="absolute inset-0 -z-10">
-      <WavyBackground className="max-w-4xl mx-auto pb-40">
-    <p className="text-2xl md:text-4xl lg:text-7xl text-white font-bold inter-var text-center">
+      <WavyBackground className="">
+    <h1 className="text-5xl md:text-4xl lg:text-7xl text-white font-bold inter-var text-center">
       Portfolio
-    </p>
+    </h1>
     <h2 className=" mt-3 text-white font-normal inter-var text-center text-xl">
       Made with
     </h2>
     <div className="flex gap-4 items-center justify-center m-5 text-6xl burn opacity-75">
-      <a href="https://react.dev/"><FaReact/></a>
-      <a href="https://tailwindcss.com"><RiTailwindCssFill/></a>
-      <a href="https://nextjs.org/"><RiNextjsLine /></a>
-      <a href="https://ui.shadcn.com"><SiShadcnui/></a>
-      <a href="https://ui.aceternity.com">
+    <a href="https://react.dev/" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-reactBlue "><FaReact/></a>
+      <a href="https://tailwindcss.com" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-tailwindBlue "><RiTailwindCssFill/></a>
+      <a href="https://nextjs.org/" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-nextjsGrey # "><RiNextjsLine /></a>
+      <a href="https://ui.shadcn.com" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-black "><SiShadcnui/></a>
+      <a href="https://ui.aceternity.com" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ">
       <svg 
         width="80"
         height="60"
@@ -40,13 +41,17 @@ export default function Home() {
         />
       </svg>
       </a>
-    
-    
-    
-    
+      
+    </div>
+    <div className="flex flex-col items-center justify-center gap-5 text-white">
+    <p>View The Source Code on Github</p>
+      <a href="https://github.com/spraws/portfolio-web">
+      <ShimmerBtn></ShimmerBtn></a>
     </div>
   </WavyBackground>
+  
     </div>
+    
     
   );
 }

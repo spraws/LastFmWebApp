@@ -16,6 +16,9 @@ import {
 import { NavbarDemo } from "@/components/navbar";
 import { HoverBorderGradientDemo } from "@/components/border-gradient";
 
+import Head from 'next/head'
+
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -40,7 +43,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    
     <html className="dark">
+      <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+      <title>Portfolio</title>
+      </head>
       <body>
         {/* header */}
         <div>

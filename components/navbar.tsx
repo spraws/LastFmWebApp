@@ -31,19 +31,19 @@ function Navbar({ className }: { className?: string }) {
               title="Now Playing"
               href="/nowplaying"
               src="/"
-              description="Prepare for tech interviews like never before."
+              description="A page that displays what I am currently listeing to, in real time. Using the LastFM API."
             />
             <ProductItem
-              title="Tailwind Master Kit"
+              title="pyPass"
               href="https://tailwindmasterkit.com"
               src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
-              description="Production ready Tailwind css components for your next project"
+              description="A pyhton based password manager, with a CLI interface."
             />
             <ProductItem
-              title="Moonbeam"
+              title="win-hash-grab"
               href="https://gomoonbeam.com"
               src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
-              description="Never write from scratch again. Go from idea to blog in minutes."
+              description="A python script to retrieve user info and 'SYSTEM'/'SAM' registries, so you can retrieve the user hashed password."
             />
             <ProductItem
               title="Rogue"
@@ -53,7 +53,7 @@ function Navbar({ className }: { className?: string }) {
             />
           </div>
         </MenuItem>
-        <MenuItem setActive={setActive} active={active} item="Pricing">
+        <MenuItem setActive={setActive} active={active} item="About">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/hobby">Hobby</HoveredLink>
             <HoveredLink href="/individual">Individual</HoveredLink>

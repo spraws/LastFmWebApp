@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const {
-	default: flattenColorPalette,
+    default: flattenColorPalette,
   } = require("tailwindcss/lib/util/flattenColorPalette");
 
 const config: Config = {
@@ -63,7 +63,11 @@ const config: Config = {
           'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))'
-        }
+        },
+        // Add custom colors here
+        reactBlue: '#61dbfb',
+        tailwindBlue: '#38bdf8',
+        nextjsGrey: '#272727'
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -72,6 +76,7 @@ const config: Config = {
       },
       animation: {
         aurora: "aurora 60s linear infinite",
+        shimmer: "shimmer 2s linear infinite",
       },
       keyframes: {
         aurora: {
@@ -82,6 +87,14 @@ const config: Config = {
             backgroundPosition: "350% 50%, 350% 50%",
           },
         },
+        shimmer: {
+          from: {
+            backgroundPosition: "0 0",
+          },
+          to: {
+            backgroundPosition: "-200% 0",
+          },
+        },
       }
     }
   },
@@ -89,14 +102,14 @@ const config: Config = {
 };
 
 function addVariablesForColors({ addBase, theme }: any) {
-	let allColors = flattenColorPalette(theme("colors"));
-	let newVars = Object.fromEntries(
-	  Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-	);
+    let allColors = flattenColorPalette(theme("colors"));
+    let newVars = Object.fromEntries(
+      Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+    );
    
-	addBase({
-	  ":root": newVars,
-	});
+    addBase({
+      ":root": newVars,
+    });
   }
 
 export default config;

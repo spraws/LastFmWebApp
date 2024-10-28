@@ -62,13 +62,12 @@ const NowPlaying: React.FC = () => {
                     console.error("Response headers:", error.response.headers);
                 }
             }
-            console.log(artistName);
         };
 
         const fetchAlbumArt = async (albumName: string, artistName: string, track: string) => {
             setError(''); // Reset error state
             try {
-                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(albumName)}+${encodeURIComponent(artistName)}+${encodeURIComponent(track)}&entity=musicTrack`);
+                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(artistName)}+${encodeURIComponent(track)}&entity=musicTrack`);
                 const data = await response.json();
                 console.log(response);
                 if (data.resultCount > 0) {
@@ -81,6 +80,7 @@ const NowPlaying: React.FC = () => {
                 setError('Error fetching album art');
                 console.error(err);
             }
+            console.log(`${artistName} - ${track}. From - ${albumName}`);
         }
 
         fetchNowPlaying();
@@ -95,7 +95,7 @@ const NowPlaying: React.FC = () => {
                 {track ? (
                     <div className=''>
                         <div className=''>
-                        <div className="bg-gradient-to-r from-slate-800 via-indigo-200 to-blue-950 p-[1] mb-4 rounded-2xl ">
+                        <div className="bg-gradient-to-r from-slate-800 via-indigo-200 to-blue-950 p-[1] mb-4 rounded-2xl max-w-lg">
                             {albumArtUrl && <img src={albumArtUrl} alt={`${track.album['#text']} cover`} className="w-full rounded-2xl" />}
                         </div>
                         </div>
