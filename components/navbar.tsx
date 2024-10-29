@@ -41,7 +41,7 @@ function Navbar({ className }: { className?: string }) {
             />
             <ProductItem
               title="win-hash-grab"
-              href="/winhashgrabf"
+              href="/winhashgrab"
               src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
               description="A python script to retrieve user info and 'SYSTEM'/'SAM' registries, so you can retrieve the user hashed password."
             />
@@ -55,10 +55,7 @@ function Navbar({ className }: { className?: string }) {
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="About">
           <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/hobby">Hobby</HoveredLink>
-            <HoveredLink href="/individual">Individual</HoveredLink>
-            <HoveredLink href="/team">Team</HoveredLink>
-            <HoveredLink href="/enterprise">Enterprise</HoveredLink>
+            <HoveredLink href="/hobby">Profile</HoveredLink>
           </div>
         </MenuItem>
       </Menu>
