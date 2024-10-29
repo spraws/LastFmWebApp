@@ -51,7 +51,7 @@ export default function RootLayout({
       </head>
       <body>
         {/* header */}
-        <div>
+        <div className="z-50">
           <NavbarDemo />
         </div>
         {children}

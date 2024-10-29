@@ -11,7 +11,7 @@ import HelpBtn from "@/components/ui/help-btn";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="bg-black">
             <div className="absolute z-10 bottom-0 m-5 ">
         <HelpBtn></HelpBtn>
     </div>
@@ -22,7 +22,7 @@ export default function Home() {
     <h2 className=" mt-3 text-white font-normal inter-var text-center text-xl">
       Made with
     </h2>
-    <div className="flex gap-4 items-center justify-center m-5 text-6xl burn opacity-75">
+    <div className="flex gap-4 items-center justify-center m-5 text-6xl burn opacity-75 ">
     <a href="https://react.dev/" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-reactBlue "><FaReact/></a>
       <a href="https://tailwindcss.com" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-tailwindBlue "><RiTailwindCssFill/></a>
       <a href="https://nextjs.org/" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-nextjsGrey # "><RiNextjsLine /></a>
