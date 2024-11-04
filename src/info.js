@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react';
 import './App.css'; 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
-import { faCircleInfo, faTimes } from '@fortawesome/free-solid-svg-icons'; // Import faTimes
+import { faCircleInfo, faCircleXmark } from '@fortawesome/free-solid-svg-icons'; // Import faCircleXmark
 
 // Add the icons to the library
-library.add(faCircleInfo, faTimes);
+library.add(faCircleInfo, faCircleXmark);
 
 function Info() {
     const dialogRef = useRef(null); 
@@ -29,7 +29,7 @@ function Info() {
         <div className="info">
             <FontAwesomeIcon 
                 id='info-icon'
-                icon={isDialogOpen ? faTimes : faCircleInfo} 
+                icon={isDialogOpen ? faCircleXmark : faCircleInfo} 
                 onClick={isDialogOpen ? closeDialog : showDialog} 
             />
             <dialog ref={dialogRef} id='dialog'>
