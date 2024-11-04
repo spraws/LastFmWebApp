@@ -8,7 +8,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate for routing
 import './App.css';
 
 export default function TemporaryDrawer() {

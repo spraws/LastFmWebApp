@@ -7,6 +7,7 @@
 :root{
   --background-color: #20232a;
   --background-lighter: #6b87bea2;
+  --background-darker: #16181f;
   --green:#8dc891;
   --react-blue: #61DBFB;
   --lastfm-red: #e11c23;
@@ -144,6 +145,51 @@ body{
 /*   
   style={{ fontSize: '2em', display: 'inline-block', fontFamily: 'Source Code Pro', color: '#8dc891'}} */
 
+.info{
+  color: var(--text);
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 1.5rem;
+  font-size: 1.5rem;
 
+}
+
+a{
+  color: var(--background-lighter);
+  text-decoration: underline;
+}
+
+#dialog{
+  background-color: var(--background-darker);
+  color: var(--background-lighter);
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--background-lighter);
+  font-size: 1rem;
+  font-family: 'Roboto';
+  font-weight: 300;
+  text-align: center;
+  margin: 1rem;
+  width: 30vw;
+  
+}
+
+#info-icon{
+  animation: bounceeffect 2s ;
+}
+
+
+@keyframes bounceeffect {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
 
 

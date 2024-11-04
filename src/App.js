@@ -3,12 +3,13 @@ import './App.css';
 import { TypeAnimation } from 'react-type-animation';
 import NowPlaying from './lastfm';
 import ReactFooter from './Footer';
-import TemporaryDrawer from './Drawer';
+import Info from './info';
+// import TemporaryDrawer from './Drawer';
 
 function App() {
   return (
     <div className="App">
-      <TemporaryDrawer />
+      <Info/>
       <div className="welcomeMsg">
       <WelcomeMsg />
       </div>
