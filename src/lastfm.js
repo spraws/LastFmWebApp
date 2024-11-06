@@ -11,6 +11,7 @@ const NowPlaying = () => {
     const [track, setTrack] = useState(null);
     const [albumArtUrl, setAlbumArtUrl] = useState('');
     const [error, setError] = useState('');
+    const [songName, setSongName] = useState('');
     const API_KEY = process.env.REACT_APP_LAST_FM_API_KEY;
     const USERNAME = process.env.REACT_APP_LASTFM_USERNAME;
     infinity.register();
@@ -62,40 +63,29 @@ const NowPlaying = () => {
 
 
 
-        const fetchAlbumArt = async (albumName, artistName) => {
+        const fetchAlbumArt = async (albumName, artistName, track) => {
             setError(''); // Reset error state
             try {
-                const discogsAPI = process.env.REACT_APP_DISCOGS_API_KEY;
-                
-                const response = await fetch(`https://api.discogs.com/database/search?artist=${encodeURIComponent(artistName)}&release_title=${encodeURIComponent(albumName)}&type=release&token=${discogsAPI}`);
+                //note
+                //use corsproxy.io to bypass CORS policy on localhost eg:https://corsproxy.io/?https://api.deezer.com/search?q=${encodeURIComponent(artistName)}+${encodeURIComponent(track)}
+                const response = await fetch(`https://api.deezer.com/search?q=${encodeURIComponent(artistName)}+${encodeURIComponent(track)}+${encodeURIComponent(albumName)}`);
+                //https://api.spotify.com/v1/search?q=album:${encodeURIComponent(artistName)}+artist:${encodeURIComponent(albumName)}&type=album
                 const data = await response.json();
                 console.log(response);
-                
-                if (data.results && data.results.length > 0) {
-                    const digitalRelease = data.results.find(result => result.format && result.format.includes("MP3"));
-                    const cdRelease = data.results.find(result => result.format && result.format.includes("CD"));
-                    const vinylRelease = data.results.find(result => result.format && result.format.includes("Vinyl"));
+                console.log(encodeURIComponent(track));
 
-
-                    if (digitalRelease) {
-                        const albumArtUrl = digitalRelease.cover_image;
-                        setAlbumArtUrl(albumArtUrl);
-                    } else if (cdRelease) {
-                        const albumArtUrl = cdRelease.cover_image;
-                        setAlbumArtUrl(albumArtUrl);
-                    }
-                    else if(vinylRelease){
-                        const albumArtUrl = vinylRelease.cover_image;
-                        setAlbumArtUrl(albumArtUrl);
-                    }
-                } else {
-                    setError('No album found');
+                if(data.data && data.data.length) {
+                    const album = data.data[0];
+                    setAlbumArtUrl(album.album.cover_xl);
                 }
-            } catch (err) {
-                setError('Error fetching album art');
-                console.error(err);
+                //if no xl image is found, try to use the large image and so on
+                
+
+            } catch (error) {
+                console.error("Error fetching album art data from Deezer API:", error);
+                setError('Error fetching album art data from Deezer API');
             }
-            console.log(`${artistName} - ${albumName}`);
+                
         };
         
 
