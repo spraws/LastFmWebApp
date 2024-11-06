@@ -64,7 +64,7 @@ const NowPlaying = () => {
         const fetchAlbumArt = async (albumName, artistName, trackName) => {
             setError(''); // Reset error state
             try {
-                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(albumName)}+${encodeURIComponent(artistName)}+${encodeURIComponent(trackName)}&entity=musicTrack`);
+                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(artistName)}+${encodeURIComponent(trackName)}&entity=musicTrack`);
                 const data = await response.json();
                 // console.log(response);
 
