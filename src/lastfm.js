@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { infinity } from 'ldrs';
-import { red } from '@mui/material/colors';
 export const time = new Date().toLocaleTimeString();
 
 
@@ -11,7 +10,6 @@ const NowPlaying = () => {
     const [track, setTrack] = useState(null);
     const [albumArtUrl, setAlbumArtUrl] = useState('');
     const [error, setError] = useState('');
-    const [songName, setSongName] = useState('');
     const API_KEY = process.env.REACT_APP_LAST_FM_API_KEY;
     const USERNAME = process.env.REACT_APP_LASTFM_USERNAME;
     infinity.register();
@@ -49,7 +47,7 @@ const NowPlaying = () => {
         const fetchArtist = async (artistName) => {
             try {
                 const response = await axios.get(`https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistName}&api_key=${API_KEY}&format=json`);
-                // console.log(response.data); // Log the response to verify API access
+                console.log(response.data); // Log the response to verify API access
             } catch (error) {
                 console.error("Error fetching artist data from Last.fm API:", error);
                 if (error.response) {
