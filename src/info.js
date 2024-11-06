@@ -33,7 +33,7 @@ function Info() {
                 onClick={isDialogOpen ? closeDialog : showDialog} 
             />
             <dialog ref={dialogRef} id='dialog'>
-                I am currently experimenting with a new UI, built with NextJS and Aceturnity, check it out <a href="https://master.d14jxbt1non2zy.amplifyapp.com/">Here!</a>
+                I am currently experimenting with a new UI, built with NextJS and Aceturnity, check it out <a href="https://next.jonty.info/">Here!</a>
             </dialog>
         </div>
     );
