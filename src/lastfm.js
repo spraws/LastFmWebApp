@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { infinity } from 'ldrs';
+import { red } from '@mui/material/colors';
 export const time = new Date().toLocaleTimeString();
 
 
@@ -61,16 +62,32 @@ const NowPlaying = () => {
 
 
 
-        const fetchAlbumArt = async (albumName, artistName, trackName) => {
+        const fetchAlbumArt = async (albumName, artistName) => {
             setError(''); // Reset error state
             try {
-                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(artistName)}+${encodeURIComponent(trackName)}&entity=musicTrack`);
+                const discogsAPI = process.env.REACT_APP_DISCOGS_API_KEY;
+                
+                const response = await fetch(`https://api.discogs.com/database/search?artist=${encodeURIComponent(artistName)}&release_title=${encodeURIComponent(albumName)}&type=release&token=${discogsAPI}`);
                 const data = await response.json();
-                // console.log(response);
+                console.log(response);
+                
+                if (data.results && data.results.length > 0) {
+                    const digitalRelease = data.results.find(result => result.format && result.format.includes("MP3"));
+                    const cdRelease = data.results.find(result => result.format && result.format.includes("CD"));
+                    const vinylRelease = data.results.find(result => result.format && result.format.includes("Vinyl"));
 
-                if (data.resultCount > 0) {
-                    const albumArt = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb'); 
-                    setAlbumArtUrl(albumArt);
+
+                    if (digitalRelease) {
+                        const albumArtUrl = digitalRelease.cover_image;
+                        setAlbumArtUrl(albumArtUrl);
+                    } else if (cdRelease) {
+                        const albumArtUrl = cdRelease.cover_image;
+                        setAlbumArtUrl(albumArtUrl);
+                    }
+                    else if(vinylRelease){
+                        const albumArtUrl = vinylRelease.cover_image;
+                        setAlbumArtUrl(albumArtUrl);
+                    }
                 } else {
                     setError('No album found');
                 }
@@ -78,8 +95,9 @@ const NowPlaying = () => {
                 setError('Error fetching album art');
                 console.error(err);
             }
-            console.log(`${artistName} - ${trackName}`);
-        }
+            console.log(`${artistName} - ${albumName}`);
+        };
+        
 
         fetchNowPlaying();
     }, [API_KEY, USERNAME]);
