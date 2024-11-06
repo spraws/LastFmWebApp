@@ -66,9 +66,13 @@ const NowPlaying = () => {
         const fetchAlbumArt = async (albumName, artistName, track) => {
             setError(''); // Reset error state
             try {
+                //Encode the album name and artist name to be used in the URL
+                track = encodeURIComponent(albumName);
+                artistName = encodeURIComponent(artistName);
+                albumName = encodeURIComponent(track);
                 //note
-                //use corsproxy.io to bypass CORS policy on localhost eg:https://corsproxy.io/?https://api.deezer.com/search?q=${encodeURIComponent(artistName)}+${encodeURIComponent(track)}
-                const response = await fetch(`https://api.deezer.com/search?q=${encodeURIComponent(artistName)}+${encodeURIComponent(track)}+${encodeURIComponent(albumName)}`);
+                //encode again? If the song doesnt use unicode characters, thr proxy will return a 404, for some reason this is the only way to fix it?
+                const response = await fetch(`https://corsproxy.io/?https://api.deezer.com/search?q=${encodeURIComponent(artistName)}+${encodeURIComponent(track)}+${encodeURIComponent(albumName)}`);
                 //https://api.spotify.com/v1/search?q=album:${encodeURIComponent(artistName)}+artist:${encodeURIComponent(albumName)}&type=album
                 const data = await response.json();
                 console.log(response);
@@ -94,6 +98,7 @@ const NowPlaying = () => {
 
     
     return (
+        
         <div className="now-playing">
             {track ? (
                 <div>
